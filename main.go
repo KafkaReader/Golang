@@ -1,0 +1,3 @@
+/*
+first try of golang
+*/
