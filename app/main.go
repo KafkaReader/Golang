@@ -7,6 +7,6 @@ package main
 import "fmt"
 
 func main() {
-	var stringForCmd = "Somthing important"
+	stringForCmd := "Somthing important"
 	fmt.Println(stringForCmd)
 }
