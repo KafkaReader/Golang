@@ -4,9 +4,15 @@ first try of golang
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	stringForCmd := "Somthing important"
-	fmt.Println(stringForCmd)
+	p := 6000.0
+	c := 0.99999999922395214173977604769732
+	m := p / c
+
+	fmt.Print(m)
+
 }
