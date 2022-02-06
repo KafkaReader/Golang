@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Landing</title>
+</head>
+<body>
+  <h1>Some headding info</h1>
+  <p>User: {{.Name}}</p>
+  <p>Age: {{.Age}}</p>
+  <p>Budget: {{.Money}}</p>
+
+<ul>
+  {{range .Hobbies}}
+    <li><b>{{.}}</b></li>
+  {{else}}
+    <li><b>There are no list</b></li>
+  {{end}}
+</ul>
+
+</body>
+</html>

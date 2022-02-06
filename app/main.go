@@ -6,21 +6,44 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
-func landing_page(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Trying for Go dev")
+type User struct {
+	Name    string
+	Age     uint16
+	Money   int16
+	Hobbies []string
 }
 
-func discription_page(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "DISCRIPTION")
+func (user *User) getAllInfo() string {
+	return fmt.Sprintf("User name: %s. Age: %d. Money: %d.", user.Name, user.Age, user.Money)
+}
+
+func landing_page(w http.ResponseWriter, r *http.Request) {
+	u := User{Name: "Max", Age: 32, Money: 1000, Hobbies: []string{"Not die", "Sadly looking at window", "Crying"}}
+	tmpl, err := template.ParseFiles("../templates/landing_page.html")
+
+	//"comma ok" pattern
+	if err != nil {
+		fmt.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	tmpl.Execute(w, u)
+}
+
+func user_page(w http.ResponseWriter, r *http.Request) {
+	u := User{Name: "Max", Age: 32, Money: 1000, Hobbies: []string{"Not die", "Sadly looking at window", "Crying"}}
+	fmt.Fprint(w, u.getAllInfo())
 }
 
 func handleRequest() {
-	http.HandleFunc("/", landing_page)
-	http.HandleFunc("/discription", discription_page)
-	http.ListenAndServe(":8080", nil)
+	http.HandleFunc("/landing", landing_page)
+	http.HandleFunc("/user_list", user_page)
+	http.ListenAndServe(":8081", nil)
 }
 
 func main() {
